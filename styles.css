@@ -268,6 +268,7 @@ body {
 
 .hero-buttons {
     display: flex;
+    flex-wrap: wrap;
     gap: 1rem;
     margin-bottom: 2rem;
 }
@@ -305,6 +306,23 @@ body {
     background: var(--primary-color);
     color: white;
     transform: translateY(-2px);
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--text-primary);
+    border: 2px solid var(--border-color);
+}
+
+.btn-outline:hover {
+    background: var(--bg-secondary);
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+.btn-outline i {
+    margin-right: 0.5rem;
 }
 
 .hero-social {
@@ -920,8 +938,10 @@ body {
 
 .skills-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 3rem;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .skills-category {
@@ -951,8 +971,23 @@ body {
 
 .skills-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 1.25rem;
+}
+
+.skills-list {
+    margin-top: 1rem;
+}
+
+.skills-list p {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    line-height: 1.8;
+    margin: 0;
+    padding: 1rem;
+    background: var(--bg-secondary);
+    border-radius: 0.75rem;
+    border-left: 3px solid var(--primary-color);
 }
 
 .skill-item {
@@ -960,10 +995,11 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 0.75rem;
-    padding: 1.5rem;
+    padding: 1.25rem 1rem;
     background: var(--bg-secondary);
     border-radius: 0.75rem;
     transition: var(--transition);
+    cursor: default;
 }
 
 .skill-item:hover {
@@ -977,8 +1013,9 @@ body {
 }
 
 .skill-icon {
-    font-size: 2.5rem;
+    font-size: 2.25rem;
     color: var(--primary-color);
+    transition: var(--transition);
 }
 
 .skill-item:hover .skill-icon {
@@ -991,6 +1028,7 @@ body {
     font-weight: 500;
     color: var(--text-primary);
     text-align: center;
+    transition: var(--transition);
 }
 
 /* ===================================

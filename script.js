@@ -243,17 +243,17 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // ===================================
 // Contact Form Handler
 // ===================================
-// Using Web3Forms - Free email service (no signup required)
-// Get your access key from: https://web3forms.com/
-// Replace 'YOUR_ACCESS_KEY' with your actual access key from Web3Forms
+// Using Formspree - Free email service (50 submissions/month on free tier)
+// Setup instructions:
+// 1. Go to https://formspree.io/ and create a free account
+// 2. Create a new form and get your form endpoint (e.g., 'https://formspree.io/f/YOUR_FORM_ID')
+// 3. Replace 'YOUR_FORMSPREE_ENDPOINT' below with your actual endpoint
 
 const contactForm = document.getElementById('contact-form');
 if (contactForm) {
     contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         
-        // Get form data
-        const formData = new FormData(contactForm);
         const submitButton = contactForm.querySelector('button[type="submit"]');
         const originalButtonText = submitButton.textContent;
         
@@ -261,26 +261,53 @@ if (contactForm) {
         submitButton.disabled = true;
         submitButton.textContent = 'Sending...';
         
-        // Add Web3Forms access key (get from https://web3forms.com/)
-        formData.append('access_key', 'YOUR_ACCESS_KEY'); // Replace with your Web3Forms access key
+        // Formspree Configuration
+        const formspreeEndpoint = 'https://formspree.io/f/66c61caa-25c8-44a9-b191-96918c0facf4';
         
-        // Send email using Web3Forms
+        // Get form data
+        const formData = {
+            name: contactForm.querySelector('#name').value,
+            email: contactForm.querySelector('#email').value,
+            subject: contactForm.querySelector('#subject').value,
+            message: contactForm.querySelector('#message').value,
+            _replyto: contactForm.querySelector('#email').value
+        };
+        
+        // Check if Formspree is configured
+        if (formspreeEndpoint === 'YOUR_FORMSPREE_ENDPOINT') {
+            // Fallback to mailto if not configured
+            const name = encodeURIComponent(formData.name);
+            const email = encodeURIComponent(formData.email);
+            const subject = encodeURIComponent(formData.subject);
+            const message = encodeURIComponent(formData.message);
+            const mailtoLink = `mailto:suhailsiddiqui1530@gmail.com?subject=${subject}&body=From: ${name} (${email})%0D%0A%0D%0A${message}`;
+            window.location.href = mailtoLink;
+            submitButton.disabled = false;
+            submitButton.textContent = originalButtonText;
+            return;
+        }
+        
+        // Send email using Formspree
         try {
-            const response = await fetch('https://api.web3forms.com/submit', {
+            const response = await fetch(formspreeEndpoint, {
                 method: 'POST',
-                body: formData
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(formData)
             });
             
             const data = await response.json();
             
-            if (data.success) {
+            if (response.ok) {
                 // Success
                 alert('Thank you for your message! I will get back to you soon.');
                 contactForm.reset();
                 submitButton.disabled = false;
                 submitButton.textContent = originalButtonText;
             } else {
-                throw new Error(data.message || 'Failed to send message');
+                throw new Error(data.error || 'Failed to send message');
             }
         } catch (error) {
             // Error handling

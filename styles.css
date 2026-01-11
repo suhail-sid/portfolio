@@ -928,6 +928,16 @@ body {
     color: #6ee7b7;
 }
 
+.publication-type.publication-published {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+[data-theme="dark"] .publication-type.publication-published {
+    background: #1e3a8a;
+    color: #93c5fd;
+}
+
 /* ===================================
    Skills Section
    =================================== */

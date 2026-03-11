@@ -135,8 +135,8 @@
                     </p>
                     <div class="about-stats">
                         <div class="stat-item">
-                            <div class="stat-number" data-target="1">0</div>
-                            <div class="stat-label">Years Experience</div>
+                            <div class="stat-number" id="experience-counter">0</div>
+                            <div class="stat-label">Experience</div>
                         </div>
                         <div class="stat-item">
                             <div class="stat-number" data-target="10">0</div>
@@ -184,6 +184,25 @@
                                 tickets</li>
                             <li>Collaborate with stakeholders to develop and deploy new features and enhancements</li>
                             <li>Participate in daily stand-up meetings and scheduled team discussions</li>
+                            <li>Developed and enhanced a web application using Angular (frontend) and Flask (backend), implementing features for data handling and UI interaction</li>
+                            <li>Implemented search, pagination, and form validation in Angular components to improve data management and user experience</li>
+                            <li>Integrated frontend components with Flask APIs for efficient data retrieval, processing, and display</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item" data-aos="fade-up">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <h3 class="job-title">Backend / Integration Engineer (Freelance)</h3>
+                            <span class="company">TheTechRavens</span>
+                            <span class="location">Remote</span>
+                        </div>
+                        <span class="timeline-date">July 2024 – June 2025</span>
+                        <ul class="job-description">
+                            <li><strong>JiveBird:</strong> Served as Lead Backend Engineer for a digital gifting platform. Engineered Django REST APIs, managed complex third-party integrations (Stripe, PayPal, Vonage, HubSpot), and handled AWS infrastructure (S3, RDS, Serverless deployment).</li>
+                            <li><strong>Capital Car Rental:</strong> Built a middleware application using Django REST Framework to connect a React frontend with legacy SOAP webservices (Rentway). Designed data caching layers with PostgreSQL to optimize performance and prevent queries bottlenecks.</li>
+                            <li><strong>Private Jet Nation:</strong> Maintained and enhanced a network of aviation community portals (job boards, directories). Implemented client-driven frontend changes, bug fixes, and responsive redesigns across multiple domains.</li>
                         </ul>
                     </div>
                 </div>
@@ -241,13 +260,7 @@
             <div class="projects-grid">
                 <div class="project-card" data-aos="fade-up">
                     <div class="project-image">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="https://github.com/suhail-sid" target="_blank" class="project-link">
-                                    <i class="fab fa-github"></i>
-                                </a>
-                            </div>
-                        </div>
+                        <div class="project-overlay"></div>
                         <div class="project-icon">
                             <i class="fas fa-bolt"></i>
                         </div>
@@ -267,17 +280,16 @@
                             <span class="tech-tag">MongoDB</span>
                             <span class="tech-tag">IoT</span>
                         </div>
+                        <div class="project-url-list">
+                            <a href="https://github.com/suhail-sid/smartmeter" target="_blank" class="project-url-item">
+                                <i class="fab fa-github"></i> View GitHub Repository
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div class="project-card" data-aos="fade-up">
                     <div class="project-image">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="https://github.com/suhail-sid" target="_blank" class="project-link">
-                                    <i class="fab fa-github"></i>
-                                </a>
-                            </div>
-                        </div>
+                        <div class="project-overlay"></div>
                         <div class="project-icon">
                             <i class="fas fa-graduation-cap"></i>
                         </div>
@@ -295,32 +307,106 @@
                             <span class="tech-tag">SQLite</span>
                             <span class="tech-tag">Bootstrap</span>
                         </div>
+                        <div class="project-url-list">
+                            <a href="https://github.com/suhail-sid/student_management_project" target="_blank" class="project-url-item">
+                                <i class="fab fa-github"></i> View GitHub Repository
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div class="project-card" data-aos="fade-up">
                     <div class="project-image">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="https://github.com/suhail-sid" target="_blank" class="project-link">
-                                    <i class="fab fa-github"></i>
-                                </a>
-                            </div>
-                        </div>
+                        <div class="project-overlay"></div>
                         <div class="project-icon">
-                            <i class="fas fa-tasks"></i>
+                            <i class="fas fa-plane"></i>
                         </div>
                     </div>
                     <div class="project-content">
-                        <h3 class="project-title">To-Do List Web App</h3>
+                        <h3 class="project-title">Private Jet Nation</h3>
                         <p class="project-description">
-                            A lightweight task management application showcasing backend development expertise with
-                            Django.
-                            Features full CRUD operations and a responsive, intuitive user interface.
+                            Maintained and updated a diverse network of aviation community and job portal websites (PC12 Nation, Caravan Nation, Skydiver Driver, etc.). Executed client-driven frontend requirements, responsive redesigns, bug fixes, and feature enhancements across the platform.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">HTML5</span>
+                            <span class="tech-tag">CSS3</span>
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">Responsive Design</span>
+                        </div>
+                        <div class="project-url-list">
+                            <a href="https://pc12nation.com/" target="_blank" class="project-url-item">
+                                <i class="fas fa-globe"></i> PC12 Nation
+                            </a>
+                            <a href="https://caravannation.com/sales.htm" target="_blank" class="project-url-item">
+                                <i class="fas fa-globe"></i> Caravan Nation Sales
+                            </a>
+                            <a href="https://caravannation.com/vendor_directory.html" target="_blank" class="project-url-item">
+                                <i class="fas fa-globe"></i> Caravan Nation Vendor Directory
+                            </a>
+                            <a href="https://turbopropnation.com/index.html#next" target="_blank" class="project-url-item">
+                                <i class="fas fa-globe"></i> Turbo Prop Nation
+                            </a>
+                            <a href="https://avwrk.com/aviation_jobs_listings.html" target="_blank" class="project-url-item">
+                                <i class="fas fa-globe"></i> AvWrk Jobs
+                            </a>
+                            <a href="https://skydiverdriver.com/" target="_blank" class="project-url-item">
+                                <i class="fas fa-globe"></i> Skydiver Driver
+                            </a>
+                            <a href="https://privatejetnation.com/articles.html" target="_blank" class="project-url-item">
+                                <i class="fas fa-globe"></i> Private Jet Nation Articles
+                            </a>
+                            <a href="https://lowtimepilots.com/" target="_blank" class="project-url-item">
+                                <i class="fas fa-globe"></i> Low Time Pilots
+                            </a>
+                            <a href="https://skycouriernation.com/" target="_blank" class="project-url-item">
+                                <i class="fas fa-globe"></i> Sky Courier Nation
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card" data-aos="fade-up">
+                    <div class="project-image">
+                        <div class="project-overlay"></div>
+                        <div class="project-icon">
+                            <i class="fas fa-dove"></i>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">JiveBird</h3>
+                        <p class="project-description">
+                            Comprehensive digital gifting and communications platform. Engineered core Django REST APIs and robust AWS infrastructure. Managed complex integrations with Stripe, PayPal, Nexmo (Vonage) for SMS/Voice, and HubSpot CRM, delivering a scalable backend.
                         </p>
                         <div class="project-tech">
                             <span class="tech-tag">Python</span>
-                            <span class="tech-tag">Django</span>
-                            <span class="tech-tag">Bootstrap</span>
+                            <span class="tech-tag">Django REST</span>
+                            <span class="tech-tag">AWS (S3/RDS/Lambda)</span>
+                            <span class="tech-tag">PostgreSQL</span>
+                            <span class="tech-tag">Third-party APIs</span>
+                        </div>
+                        <div class="project-url-list">
+                            <a href="https://www.web.jivebird.com/" target="_blank" class="project-url-item">
+                                <i class="fas fa-external-link-alt"></i> Live Web App
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card" data-aos="fade-up">
+                    <div class="project-image">
+                        <div class="project-overlay"></div>
+                        <div class="project-icon">
+                            <i class="fas fa-car"></i>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Capital Car Rental Backend</h3>
+                        <p class="project-description">
+                            Middleware application connecting a modern React frontend with a legacy SOAP webservice (Rentway). Designed system abstractions with Python Zeep, engineered data caching/syncing with PostgreSQL to prevent query bottlenecks, and managed AWS deployment.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Django REST</span>
+                            <span class="tech-tag">SOAP/Zeep</span>
+                            <span class="tech-tag">PostgreSQL</span>
+                            <span class="tech-tag">AWS</span>
                         </div>
                     </div>
                 </div>

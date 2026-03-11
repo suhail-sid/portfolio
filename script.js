@@ -209,7 +209,46 @@ function animateCounter(element) {
     }, 16);
 }
 
-const statNumbers = document.querySelectorAll('.stat-number');
+// Dynamic Experience Calculator (from January 2024)
+function calculateExperience() {
+    const startDate = new Date(2024, 0, 1); // January 2024
+    const now = new Date();
+    
+    let years = now.getFullYear() - startDate.getFullYear();
+    let months = now.getMonth() - startDate.getMonth();
+    
+    if (months < 0) {
+        years--;
+        months += 12;
+    }
+    
+    return { years, months };
+}
+
+function animateExperience(element) {
+    const { years, months } = calculateExperience();
+    const totalMonths = years * 12 + months;
+    const duration = 2000;
+    const increment = totalMonths / (duration / 16);
+    let current = 0;
+
+    const timer = setInterval(() => {
+        current += increment;
+        if (current >= totalMonths) {
+            element.textContent = `${years} Yr ${months} Mo`;
+            clearInterval(timer);
+        } else {
+            const currentMonths = Math.floor(current);
+            const displayYears = Math.floor(currentMonths / 12);
+            const displayMonths = currentMonths % 12;
+            element.textContent = `${displayYears} Yr ${displayMonths} Mo`;
+        }
+    }, 16);
+}
+
+const experienceEl = document.getElementById('experience-counter');
+const statNumbers = document.querySelectorAll('.stat-number[data-target]');
+
 const statsObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -222,6 +261,19 @@ const statsObserver = new IntersectionObserver((entries) => {
 statNumbers.forEach(stat => {
     statsObserver.observe(stat);
 });
+
+// Observe the experience counter separately
+if (experienceEl) {
+    const expObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateExperience(entry.target);
+                expObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+    expObserver.observe(experienceEl);
+}
 
 // ===================================
 // Smooth Scroll

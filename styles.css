@@ -851,6 +851,33 @@ body {
     font-weight: 500;
 }
 
+.project-url-list {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.project-url-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.project-url-item:hover {
+    color: var(--text-primary);
+    transform: translateX(5px);
+}
+
+.project-url-item i {
+    font-size: 0.8rem;
+}
+
 /* ===================================
    Publications Section
    =================================== */

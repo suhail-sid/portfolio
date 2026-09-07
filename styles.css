@@ -391,9 +391,12 @@ body {
 }
 
 @keyframes float {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: translateY(0) rotate(0deg);
     }
+
     50% {
         transform: translateY(-20px) rotate(5deg);
     }
@@ -436,6 +439,7 @@ body {
         opacity: 1;
         transform: translateX(-50%) translateY(0);
     }
+
     100% {
         opacity: 0;
         transform: translateX(-50%) translateY(15px);
@@ -453,9 +457,12 @@ body {
 }
 
 @keyframes arrow {
-    0%, 100% {
+
+    0%,
+    100% {
         opacity: 0;
     }
+
     50% {
         opacity: 1;
     }
@@ -601,10 +608,13 @@ body {
 }
 
 @keyframes pulse {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: translate(-50%, -50%) scale(1);
         opacity: 0.5;
     }
+
     50% {
         transform: translate(-50%, -50%) scale(1.5);
         opacity: 0.2;
@@ -1313,6 +1323,7 @@ body {
         opacity: 0;
         transform: translateY(30px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -1338,32 +1349,32 @@ body {
         grid-template-columns: 1fr;
         text-align: center;
     }
-    
+
     .hero-name {
         font-size: 3rem;
     }
-    
+
     .about-content {
         grid-template-columns: 1fr;
     }
-    
+
     .contact-content {
         grid-template-columns: 1fr;
     }
-    
+
     .timeline::before {
         left: 20px;
     }
-    
+
     .timeline-item {
         flex-direction: row !important;
     }
-    
+
     .timeline-content {
         width: calc(100% - 60px);
         margin-left: 60px;
     }
-    
+
     .timeline-marker {
         left: 20px;
     }
@@ -1373,17 +1384,17 @@ body {
     .hamburger {
         display: flex;
     }
-    
+
     .nav-actions {
         gap: 0.75rem;
     }
-    
+
     .theme-toggle {
         width: 40px;
         height: 40px;
         font-size: 1.1rem;
     }
-    
+
     .nav-menu {
         position: fixed;
         left: -100%;
@@ -1396,51 +1407,51 @@ body {
         box-shadow: var(--shadow-lg);
         padding: 2rem 0;
     }
-    
+
     [data-theme="dark"] .nav-menu {
         background: var(--bg-secondary);
     }
-    
+
     .nav-menu.active {
         left: 0;
     }
-    
+
     .hero {
         padding: 6rem 1rem 4rem;
     }
-    
+
     .hero-name {
         font-size: 2.5rem;
     }
-    
+
     .hero-title {
         font-size: 1.25rem;
     }
-    
+
     .section-title {
         font-size: 2rem;
     }
-    
+
     .about-stats {
         grid-template-columns: 1fr;
     }
-    
+
     .projects-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .skills-container {
         grid-template-columns: 1fr;
     }
-    
+
     .certifications-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .hero-buttons {
         flex-direction: column;
     }
-    
+
     .btn {
         width: 100%;
         text-align: center;
@@ -1451,29 +1462,147 @@ body {
     .nav-container {
         padding: 1rem;
     }
-    
+
     .container {
         padding: 0 1rem;
     }
-    
+
     .hero-name {
         font-size: 2rem;
     }
-    
+
     .hero-description {
         font-size: 1rem;
     }
-    
+
     .section-title {
         font-size: 1.75rem;
     }
-    
+
     .publication-card {
         flex-direction: column;
     }
-    
+
     .skills-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
+.hamburger {
+    display: flex;
+}
+
+.nav-menu {
+    position: fixed;
+    left: -100%;
+    top: 0;
+    flex-direction: column;
+    background: var(--bg-primary);
+    backdrop-filter: blur(20px);
+    width: 100%;
+    height: 100vh;
+    text-align: center;
+    transition: var(--transition);
+    padding: 6rem 2rem 2rem;
+    gap: 0.5rem;
+    z-index: 998;
+}
+
+.nav-menu.active {
+    left: 0;
+}
+
+.nav-link {
+    font-size: 1.1rem;
+    padding: 0.875rem;
+}
+
+.hero {
+    padding: 6rem 1.5rem 4rem;
+}
+
+.hero-name {
+    font-size: 2.5rem;
+}
+
+.hero-title {
+    font-size: 1.25rem;
+}
+
+.section-title {
+    font-size: 2rem;
+}
+
+.about-stats {
+    grid-template-columns: 1fr;
+}
+
+.projects-grid {
+    grid-template-columns: 1fr;
+}
+
+.skills-container {
+    grid-template-columns: 1fr;
+}
+
+.certifications-grid {
+    grid-template-columns: 1fr;
+}
+
+.hero-buttons {
+    flex-direction: column;
+    align-items: center;
+}
+
+.btn {
+    width: 100%;
+}
+
+.stat-number {
+    font-size: 2rem;
+}
+
+.education-card {
+    flex-direction: column;
+    text-align: center;
+}
+}
+
+@media (max-width: 480px) {
+    .nav-container {
+        padding: 0.875rem 1rem;
+    }
+
+    .container {
+        padding: 0 1rem;
+    }
+
+    .hero-name {
+        font-size: 2rem;
+    }
+
+    .hero-description {
+        font-size: 0.95rem;
+    }
+
+    .section-title {
+        font-size: 1.75rem;
+    }
+
+    .publication-card {
+        flex-direction: column;
+    }
+
+    .skills-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .hero-visual {
+        height: 280px;
+    }
+
+    .hero-image-frame {
+        width: 220px;
+        height: 220px;
+    }
+}

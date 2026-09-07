@@ -13,7 +13,7 @@ updateThemeIcon(currentTheme);
 themeToggle.addEventListener('click', () => {
     const currentTheme = html.getAttribute('data-theme');
     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    
+
     html.setAttribute('data-theme', newTheme);
     localStorage.setItem('theme', newTheme);
     updateThemeIcon(newTheme);
@@ -45,7 +45,7 @@ navLinks.forEach(link => {
     link.addEventListener('click', () => {
         hamburger.classList.remove('active');
         navMenu.classList.remove('active');
-        
+
         // Update active link
         navLinks.forEach(l => l.classList.remove('active'));
         link.classList.add('active');
@@ -73,7 +73,7 @@ window.addEventListener('scroll', () => {
             current = section.getAttribute('id');
         }
     });
-    
+
     navLinks.forEach(link => {
         link.classList.remove('active');
         if (link.getAttribute('href') === `#${current}`) {
@@ -91,40 +91,40 @@ let particleSystem;
 function initParticles() {
     const canvas = document.getElementById('particles-canvas');
     if (!canvas) return;
-    
+
     // Scene setup
     scene = new THREE.Scene();
     camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(window.devicePixelRatio);
-    
+
     // Camera position
     camera.position.z = 1000;
-    
+
     // Create particles
     const particleCount = 2000;
     const geometry = new THREE.BufferGeometry();
     const positions = new Float32Array(particleCount * 3);
     const colors = new Float32Array(particleCount * 3);
-    
+
     const color1 = new THREE.Color(0x6366f1); // Primary color
     const color2 = new THREE.Color(0x8b5cf6); // Secondary color
-    
+
     for (let i = 0; i < particleCount * 3; i += 3) {
         positions[i] = (Math.random() - 0.5) * 2000;
         positions[i + 1] = (Math.random() - 0.5) * 2000;
         positions[i + 2] = (Math.random() - 0.5) * 2000;
-        
+
         const color = Math.random() > 0.5 ? color1 : color2;
         colors[i] = color.r;
         colors[i + 1] = color.g;
         colors[i + 2] = color.b;
     }
-    
+
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
     geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-    
+
     const material = new THREE.PointsMaterial({
         size: 3,
         vertexColors: true,
@@ -132,28 +132,28 @@ function initParticles() {
         opacity: 0.6,
         blending: THREE.AdditiveBlending
     });
-    
+
     particleSystem = new THREE.Points(geometry, material);
     scene.add(particleSystem);
-    
+
     // Animation
     function animate() {
         requestAnimationFrame(animate);
-        
+
         particleSystem.rotation.x += 0.0005;
         particleSystem.rotation.y += 0.001;
-        
+
         const positions = particleSystem.geometry.attributes.position.array;
         for (let i = 1; i < positions.length; i += 3) {
             positions[i] += Math.sin(Date.now() * 0.001 + i) * 0.1;
         }
         particleSystem.geometry.attributes.position.needsUpdate = true;
-        
+
         renderer.render(scene, camera);
     }
-    
+
     animate();
-    
+
     // Handle resize
     window.addEventListener('resize', () => {
         camera.aspect = window.innerWidth / window.innerHeight;
@@ -197,7 +197,7 @@ function animateCounter(element) {
     const duration = 2000;
     const increment = target / (duration / 16);
     let current = 0;
-    
+
     const timer = setInterval(() => {
         current += increment;
         if (current >= target) {
@@ -213,15 +213,15 @@ function animateCounter(element) {
 function calculateExperience() {
     const startDate = new Date(2024, 0, 1); // January 2024
     const now = new Date();
-    
+
     let years = now.getFullYear() - startDate.getFullYear();
     let months = now.getMonth() - startDate.getMonth();
-    
+
     if (months < 0) {
         years--;
         months += 12;
     }
-    
+
     return { years, months };
 }
 
@@ -305,66 +305,53 @@ const contactForm = document.getElementById('contact-form');
 if (contactForm) {
     contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        
+
         const submitButton = contactForm.querySelector('button[type="submit"]');
+        const statusMessage = document.getElementById('form-status');
         const originalButtonText = submitButton.textContent;
-        
-        // Disable button and show loading state
+        const formspreeEndpoint = contactForm.action;
+        const formData = new FormData(contactForm);
+        const email = contactForm.querySelector('#email').value;
+        formData.append('_replyto', email);
+
         submitButton.disabled = true;
         submitButton.textContent = 'Sending...';
-        
-        // Formspree Configuration
-        const formspreeEndpoint = 'https://formspree.io/f/66c61caa-25c8-44a9-b191-96918c0facf4';
-        
-        // Get form data
-        const formData = {
-            name: contactForm.querySelector('#name').value,
-            email: contactForm.querySelector('#email').value,
-            subject: contactForm.querySelector('#subject').value,
-            message: contactForm.querySelector('#message').value,
-            _replyto: contactForm.querySelector('#email').value
-        };
-        
-        // Check if Formspree is configured
-        if (formspreeEndpoint === 'YOUR_FORMSPREE_ENDPOINT') {
-            // Fallback to mailto if not configured
-            const name = encodeURIComponent(formData.name);
-            const email = encodeURIComponent(formData.email);
-            const subject = encodeURIComponent(formData.subject);
-            const message = encodeURIComponent(formData.message);
-            const mailtoLink = `mailto:suhailsiddiqui1530@gmail.com?subject=${subject}&body=From: ${name} (${email})%0D%0A%0D%0A${message}`;
-            window.location.href = mailtoLink;
-            submitButton.disabled = false;
-            submitButton.textContent = originalButtonText;
-            return;
-        }
-        
-        // Send email using Formspree
+        statusMessage.textContent = 'Sending your message...';
+        statusMessage.className = 'form-status is-sending';
+
         try {
             const response = await fetch(formspreeEndpoint, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
                     'Accept': 'application/json'
                 },
-                body: JSON.stringify(formData)
+                body: formData
             });
-            
-            const data = await response.json();
-            
+
+            const responseText = await response.text();
+            let data = {};
+            try {
+                data = responseText ? JSON.parse(responseText) : {};
+            } catch {
+                data = {};
+            }
+
             if (response.ok) {
-                // Success
-                alert('Thank you for your message! I will get back to you soon.');
                 contactForm.reset();
-                submitButton.disabled = false;
-                submitButton.textContent = originalButtonText;
+                statusMessage.textContent = 'Thanks, your message has been sent.';
+                statusMessage.className = 'form-status is-success';
             } else {
-                throw new Error(data.error || 'Failed to send message');
+                throw new Error(data.error || 'Form submission failed');
             }
         } catch (error) {
-            // Error handling
             console.error('Form Error:', error);
-            alert('Sorry, there was an error sending your message. Please try again or contact me directly at suhailsiddiqui1530@gmail.com');
+            const name = encodeURIComponent(contactForm.querySelector('#name').value);
+            const subject = encodeURIComponent(contactForm.querySelector('#subject').value);
+            const message = encodeURIComponent(contactForm.querySelector('#message').value);
+            window.location.href = `mailto:suhailsiddiqui1530@gmail.com?subject=${subject}&body=From: ${name} (${encodeURIComponent(email)})%0D%0A%0D%0A${message}`;
+            statusMessage.textContent = 'Opening your email app to finish sending the message.';
+            statusMessage.className = 'form-status is-fallback';
+        } finally {
             submitButton.disabled = false;
             submitButton.textContent = originalButtonText;
         }
@@ -372,36 +359,12 @@ if (contactForm) {
 }
 
 // ===================================
-// 3D Card Tilt Effect
-// ===================================
-const projectCards = document.querySelectorAll('.project-card');
-projectCards.forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        
-        const rotateX = (y - centerY) / 10;
-        const rotateY = (centerX - x) / 10;
-        
-        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px)`;
-    });
-    
-    card.addEventListener('mouseleave', () => {
-        card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
-    });
-});
-
-// ===================================
 // Typing Animation for Hero
 // ===================================
 function typeWriter(element, text, speed = 100) {
     let i = 0;
     element.textContent = '';
-    
+
     function type() {
         if (i < text.length) {
             element.textContent += text.charAt(i);
@@ -409,7 +372,7 @@ function typeWriter(element, text, speed = 100) {
             setTimeout(type, speed);
         }
     }
-    
+
     type();
 }
 
@@ -423,7 +386,7 @@ window.addEventListener('scroll', () => {
         heroContent.style.transform = `translateY(${scrolled * 0.5}px)`;
         heroContent.style.opacity = 1 - scrolled / 500;
     }
-    
+
     // Parallax for floating cards
     const cards = document.querySelectorAll('.floating-card');
     cards.forEach((card, index) => {
@@ -437,11 +400,11 @@ window.addEventListener('scroll', () => {
 // ===================================
 const skillItems = document.querySelectorAll('.skill-item');
 skillItems.forEach(item => {
-    item.addEventListener('mouseenter', function() {
+    item.addEventListener('mouseenter', function () {
         this.style.transform = 'translateY(-10px) scale(1.05)';
     });
-    
-    item.addEventListener('mouseleave', function() {
+
+    item.addEventListener('mouseleave', function () {
         this.style.transform = 'translateY(0) scale(1)';
     });
 });
@@ -451,7 +414,7 @@ skillItems.forEach(item => {
 // ===================================
 window.addEventListener('load', () => {
     document.body.classList.add('loaded');
-    
+
     // Animate hero content
     const heroText = document.querySelector('.hero-text');
     if (heroText) {
@@ -500,4 +463,3 @@ window.addEventListener('scroll', () => {
 // ===================================
 console.log('%c👋 Hello! Thanks for checking out my portfolio.', 'color: #6366f1; font-size: 16px; font-weight: bold;');
 console.log('%cWant to see the code? Check out: https://github.com/suhail-sid', 'color: #8b5cf6; font-size: 14px;');
-

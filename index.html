@@ -7,6 +7,7 @@
     <title>Suhail Siddiqui - Full Stack Python Developer</title>
     <meta name="description" content="Portfolio of Suhail Siddiqui - Full Stack Python Developer & IoT Enthusiast">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="redesign.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -88,6 +89,7 @@
             </div>
             <div class="hero-image">
                 <div class="image-wrapper">
+                    <img src="images/profile.JPG" alt="Suhail Siddiqui" class="profile-image">
                     <div class="floating-card card-1"></div>
                     <div class="floating-card card-2"></div>
                     <div class="floating-card card-3"></div>
@@ -148,11 +150,16 @@
                         </div>
                     </div>
                 </div>
-                <div class="about-image">
-                    <div class="image-container">
-                        <!-- Place your profile image as 'profile.jpg' in the 'images' folder -->
-                        <img src="images/profile.jpg" alt="Suhail Siddiqui" class="profile-image">
-                        <div class="image-glow"></div>
+                <div class="about-visual" aria-hidden="true">
+                    <div class="system-visual">
+                        <div class="system-grid"></div>
+                        <div class="system-orbit orbit-one"></div>
+                        <div class="system-orbit orbit-two"></div>
+                        <div class="system-core"><span>SS</span></div>
+                        <div class="system-node node-python">PYTHON</div>
+                        <div class="system-node node-iot">IOT</div>
+                        <div class="system-node node-api">API</div>
+                        <div class="system-caption">BUILD / CONNECT / SCALE</div>
                     </div>
                 </div>
             </div>
@@ -894,7 +901,8 @@
                     </div>
                 </div>
                 <div class="contact-form-container">
-                    <form class="contact-form" id="contact-form">
+                    <form class="contact-form" id="contact-form"
+                        action="mailto:suhailsiddiqui1530@gmail.com" method="POST" enctype="text/plain">
                         <input type="hidden" name="to_email" value="suhailsiddiqui1530@gmail.com">
                         <div class="form-group">
                             <input type="text" id="name" name="name" placeholder="Your Name" required>
@@ -910,6 +918,7 @@
                                 required></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Send Message</button>
+                        <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
                     </form>
                 </div>
             </div>

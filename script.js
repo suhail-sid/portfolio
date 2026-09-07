@@ -309,7 +309,7 @@ if (contactForm) {
         const submitButton = contactForm.querySelector('button[type="submit"]');
         const statusMessage = document.getElementById('form-status');
         const originalButtonText = submitButton.textContent;
-        const formspreeEndpoint = contactForm.action;
+        const formspreeEndpoint = 'https://formspree.io/f/xvkowdgr';
         const formData = new FormData(contactForm);
         const email = contactForm.querySelector('#email').value;
         formData.append('_replyto', email);
